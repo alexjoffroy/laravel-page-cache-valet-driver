@@ -12,8 +12,9 @@ class LaravelPageCacheValetDriver extends LaravelValetDriver
      */
     public function serves($sitePath, $siteName, $uri)
     {
-        return parent::serves($sitePath, $siteName, $uri) && 
-            is_dir("$sitePath/public/page-cache");
+        return $_SERVER['REQUEST_METHOD'] === 'GET' &&
+            is_dir("$sitePath/public/page-cache") &&
+            parent::serves($sitePath, $siteName, $uri);
     }
 
     /**
